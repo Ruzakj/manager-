@@ -20,8 +20,7 @@ jobs:
         run: npm install
       - name: Dependency security audit
         run: |
-          npm audit --json > npm-audit.json || true
-          node -e "const r=require('./npm-audit.json'); console.log('Vulnerability counts:',r.metadata?.vulnerabilities); for (const [name,v] of Object.entries(r.vulnerabilities||{})) console.log(name, v.severity, 'fix:', JSON.stringify(v.fixAvailable));"
+          npm audit --audit-level=high
       - name: Syntax checks
         run: npm run check
       - name: Unit tests
