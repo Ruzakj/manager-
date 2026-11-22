@@ -5,7 +5,7 @@ const tx=(type,amount,date="2026-11-02",category="Lainnya",merchant="")=>({id:St
 describe("Finance calculations",()=>{
  it("calculates totals from stored transactions",()=>{const s=summarize([tx("income",3000000),tx("expense",25000,"2026-11-03","Makan & Minum")],"2026-11-01","2026-11-30");expect(s.income).toBe(3000000);expect(s.expenses).toBe(25000);expect(s.net).toBe(2975000);expect(s.categories["Makan & Minum"]).toBe(25000)});
  it("returns uncertain category for unclear descriptions",()=>{expect(categorize("makan siang","","expense").category).toBe("Makan & Minum");expect(categorize("Pembayaran","","expense").confidence).toBeLessThan(.5)});
- it("detects same transaction duplicates by date amount type and merchant",()=>{expect(duplicate(tx("expense",20000,"2026-11-01","Makan","warung a"),[tx("expense",20000,"2026-11-01","Lainnya","WARUNG A")])).toBe(true)});
+ it("detects same transaction duplicates by date amount type and merchant",()=>{expect(duplicate({...tx("expense",20000,"2026-11-01","Makan","warung a"),id:"new" },[{...tx("expense",20000,"2026-11-01","Lainnya","WARUNG A"),id:"stored"}])).toBe(true)});
  it("does not fabricate income or spending data",()=>{const s=allocation([],{needs:50,wants:30,savings:20,fixed:0,debt:0,target:0});expect(s.income).toBe(0);expect(s.expenses).toBe(0);expect(s.safe).toBe(0)});
 });
 describe("Schedule parser",()=>{
