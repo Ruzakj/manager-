@@ -27,3 +27,5 @@ Push ke main untuk menjalankan GitHub Actions. Unduh artifact bernama manager-pw
 - Tidak ada data contoh/fiktif pada dashboard.
 
 CI validation: patched dependencies and enforced audit threshold.
+
+Final validation: workout plan import, missed workouts and expanded OCR review.
