@@ -11,7 +11,7 @@ const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&
 const cats=type=>[...CATS[type],...db.categories];
 function notify(text){document.querySelector(".toast")?.remove();const n=document.createElement("div");n.className="toast";n.textContent=text;document.body.append(n);clearTimeout(toastTimer);toastTimer=setTimeout(()=>n.remove(),3600)}
 async function persist(){await save(db)}
-function modal(title,html){document.querySelector("#modal")?.remove();const d=document.createElement("dialog");d.id="modal";d.className="dialog";d.innerHTML="<h2>"+title+"</h2>"+html;document.body.append(d);d.showModal();d.addEventListener("click",e=>{if(e.target===d)d.close()});return d}
+function modal(title,html){document.querySelector("#modal")?.remove();const d=document.createElement("dialog");d.id="modal";d.className="dialog";d.innerHTML="<h2>"+title+"</h2>"+html;root.append(d);d.showModal();d.addEventListener("click",e=>{if(e.target===d)d.close()});return d}
 function empty(text){return'<div class="empty">'+esc(text)+"</div>"}
 function head(kicker,title,actions=""){return'<div class="page-head"><div><div class="eyebrow">'+kicker+'</div><h1>'+title+"</h1></div><div class=\"actions\">"+actions+"</div></div>"}
 function metric(label,value,note){return'<div class="panel"><div class="metric-label">'+label+'</div><div class="metric-value">'+value+'</div><div class="metric-note">'+note+"</div></div>"}
