@@ -1,6 +1,6 @@
 import {describe,it,expect} from "vitest";
 import {categorize,summarize,duplicate,allocation} from "../src/finance.js";
-import {parseSchedule} from "../src/schedule.js";
+import {parseSchedule,suggestWorkouts} from "../src/schedule.js";
 const tx=(type,amount,date="2026-11-02",category="Lainnya",merchant="")=>({id:String(amount)+date,type,amount,date,category,merchant});
 describe("Finance calculations",()=>{
  it("calculates totals from stored transactions",()=>{const s=summarize([tx("income",3000000),tx("expense",25000,"2026-11-03","Makan & Minum")],"2026-11-01","2026-11-30");expect(s.income).toBe(3000000);expect(s.expenses).toBe(25000);expect(s.net).toBe(2975000);expect(s.categories["Makan & Minum"]).toBe(25000)});
