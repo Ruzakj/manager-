@@ -25,3 +25,5 @@ Push ke main untuk menjalankan GitHub Actions. Unduh artifact bernama manager-pw
 - Parser jadwal heuristik, tidak dapat dijamin membaca seluruh bentuk tabel/foto. Pratinjau wajib diperiksa dan jadwal latihan dapat diedit sebelum digunakan.
 - Anggaran adalah perkiraan perencanaan, bukan nasihat keuangan. Biaya tetap/cicilan di Pengaturan dianggap kewajiban belum tercatat, agar tidak menghitung transaksi yang sama dua kali.
 - Tidak ada data contoh/fiktif pada dashboard.
+
+CI validation revision 2.
