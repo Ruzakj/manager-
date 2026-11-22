@@ -1,0 +1,44 @@
+name: MANAGER - Build and Test
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install
+      - name: Syntax checks
+        run: npm run check
+      - name: Unit tests
+        run: npm test
+      - name: Build production PWA
+        run: npm run build
+      - name: Verify PWA output
+        run: |
+          test -s dist/index.html
+          test -s dist/manifest.webmanifest
+          test -s dist/service-worker.js
+          test -s dist/icons/icon-192.svg
+          test -s dist/icons/icon-512.svg
+      - name: Package installable PWA
+        run: |
+          cd dist
+          zip -r ../manager-pwa.zip .
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: manager-pwa
+          path: manager-pwa.zip
+          if-no-files-found: error
+          retention-days: 30
